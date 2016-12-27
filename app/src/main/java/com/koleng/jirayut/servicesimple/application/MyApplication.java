@@ -16,6 +16,7 @@ public class MyApplication extends Application {
 
     private static MyApplication singleton;
     private static Realm database;
+    private static String SCHEDULE = "schedule";
 
     public static MyApplication getInstance() {
         return singleton;
@@ -33,9 +34,8 @@ public class MyApplication extends Application {
         Realm.init(this.getApplicationContext());
         database = Realm.getDefaultInstance();
 
-        //start service
-        Intent serviceIntent = new Intent(this.getApplicationContext() , DrugNotifyService.class);
-        this.getApplicationContext().startService(serviceIntent);
+        startService(new Intent(this.getApplicationContext(), DrugNotifyService.class).putExtra(SCHEDULE, "21:29"));
+
     }
 
     @Override

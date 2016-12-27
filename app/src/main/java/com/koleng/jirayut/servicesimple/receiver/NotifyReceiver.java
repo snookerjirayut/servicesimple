@@ -7,6 +7,8 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import com.koleng.jirayut.servicesimple.MainActivity;
@@ -18,9 +20,11 @@ import com.koleng.jirayut.servicesimple.R;
 
 public class NotifyReceiver extends BroadcastReceiver {
 
+    private static String SCHEDULE = "schedule";
+
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        String time = intent.getExtras().getString(SCHEDULE);
         Intent resultIntent = new Intent(context, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
 
@@ -35,8 +39,9 @@ public class NotifyReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setTicker("message")
-                .setContentTitle("contentTitle")
+                .setContentTitle(time)
                 .setContentText("contentText")
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setAutoCancel(true);
 
 
