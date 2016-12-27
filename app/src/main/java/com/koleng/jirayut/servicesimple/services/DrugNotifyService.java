@@ -5,10 +5,11 @@ import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.Calendar;
-import android.provider.Settings;
+
 
 import com.koleng.jirayut.servicesimple.receiver.NotifyReceiver;
+
+import java.util.Calendar;
 
 /**
  * Created by jirayut.k on 2016-12-27.
@@ -49,6 +50,6 @@ public class DrugNotifyService extends IntentService {
         Intent aIntent = new Intent(this.getApplicationContext(), NotifyReceiver.class);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, aIntent, 0);
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), (1000 * 60) * 1, alarmIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 0, alarmIntent);
     }
 }
