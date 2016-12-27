@@ -36,7 +36,6 @@ public class DrugNotifyService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-
     }
 
 
