@@ -38,6 +38,10 @@ public class DrugNotifyService extends IntentService {
         super.onCreate();
     }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_STICKY;
+    }
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -55,7 +59,7 @@ public class DrugNotifyService extends IntentService {
         calendar.set(Calendar.MINUTE, Integer.parseInt(min));
 
         Intent aIntent = new Intent(this.getApplicationContext(), NotifyReceiver.class);
-        aIntent.putExtra(SCHEDULE , time);
+        aIntent.putExtra(SCHEDULE, time);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, aIntent, 0);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 0, alarmIntent);
 
